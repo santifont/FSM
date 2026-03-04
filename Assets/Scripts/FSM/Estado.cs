@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Estado
 {
-    protected EnemigoIA agente;
+    protected GameObject agente;
+    protected GameObject jugador;
 
-    public void InicializarFSM(EnemigoIA _enemigo)
+    public void InicializarFSM(GameObject _enemigo, GameObject _jugador)
     {
         // Enlazar bien al GO que gobierna la maquina de estados;
         agente = _enemigo;
+        jugador = _jugador;
     }
 
         // 'ESTADOS' que tiene el NPC
     public enum ESTADO
     {
-        VIGILAR, ATACAR
+        VIGILAR, ATACAR, PERSEGUIR
     };
 
     // 'EVENTOS' - En que parte nos encontramos del estado
@@ -31,6 +33,7 @@ public class Estado
     // Constructor
     public Estado()
     {
+
     }
 
     // Las fases de cada estado
@@ -50,6 +53,41 @@ public class Estado
         }
         return this; // Si no salimos por el return de arriba, seguimos en el mismo estado.
     }
+    protected bool EstaCercaJugador()
+    {
+        Vector3 posJugador = GameObject.Find("Jugador").transform.position;
+        Vector3 posEnemigo = agente.transform.position;
+        float distancia = Vector3.Distance(posJugador, posEnemigo);
+        int distanciaINT = Mathf.FloorToInt(distancia);
+        //Debug.Log(distanciaINT + " metros");
 
+        if (distancia < 10)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        // ...        
+        //return false; // DE MOMENTO NO
+    }
+
+    protected bool RangoPersecucion()
+    {
+        Vector3 posJugador = GameObject.Find("Jugador").transform.position;
+        Vector3 posEnemigo = agente.transform.position;
+        float distancia = Vector3.Distance(posJugador, posEnemigo);
+        int distanciaINT = Mathf.FloorToInt(distancia);
+
+        if (distancia < 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 

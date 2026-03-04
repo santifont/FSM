@@ -17,6 +17,8 @@ public class Vigilar : Estado
         // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
 
         base.Entrar();
+        agente.GetComponent<Renderer>().material.color = Color.green;
+        agente.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     public override void Actualizar()
@@ -25,8 +27,8 @@ public class Vigilar : Estado
 
         if (EstaCercaJugador())
         {
-            siguienteEstado = new Atacar();
-            siguienteEstado.InicializarFSM(agente);
+            siguienteEstado = new Perseguir();
+            siguienteEstado.InicializarFSM(agente, jugador);
             faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
         }
     }
@@ -38,27 +40,6 @@ public class Vigilar : Estado
     }
 
     // Puede el NPC ver el jugador?
-    public bool EstaCercaJugador()
-    {
-        Vector3 posJugador = GameObject.Find("Jugador").transform.position;
-        Vector3 posEnemigo = agente.transform.position;
-        float distancia = Vector3.Distance(posJugador, posEnemigo);
-
-        int distanciaINT = Mathf.FloorToInt(distancia);
-        Debug.Log(distanciaINT + " metros");
-
-        if (distancia < 10)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-
-            // ...        
-            return false; // DE MOMENTO NO
-    }
+    
 }
 

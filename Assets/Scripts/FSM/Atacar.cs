@@ -16,11 +16,19 @@ public class Atacar : Estado
     {
         // Le pondríamos la animación de disparar, o lo que sea...
         base.Entrar();
+
+        agente.GetComponent<Renderer>().material.color = Color.red;
+        agente.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     public override void Actualizar()
     {
-
+        if (!RangoPersecucion())
+        {
+            siguienteEstado = new Perseguir();
+            siguienteEstado.InicializarFSM(agente, jugador);
+            faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
+        }
     }
 
     public override void Salir()
@@ -28,13 +36,6 @@ public class Atacar : Estado
         // Le resetearíamos la animación de disparar, o lo que sea...
         base.Salir();
     }
-
-
-
-
-
-
-
 
     public bool PuedeAtacar()
     {
