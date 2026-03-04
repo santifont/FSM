@@ -19,6 +19,7 @@ public class Atacar : Estado
 
         agente.GetComponent<Renderer>().material.color = Color.red;
         agente.GetComponent<NavMeshAgent>().isStopped = true;
+        agente.GetComponent<EnemigoIA>().EmpezarAtaque();
     }
 
     public override void Actualizar()
@@ -35,6 +36,7 @@ public class Atacar : Estado
     {
         // Le resetearíamos la animación de disparar, o lo que sea...
         base.Salir();
+        agente.GetComponent<EnemigoIA>().DetenerAtaque();
     }
 
     public bool PuedeAtacar()
