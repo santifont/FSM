@@ -6,6 +6,7 @@ using UnityEngine.AI;
 // Constructor para VIGILAR
 public class Vigilar : Estado
 {
+
     public Vigilar() : base()
     {
         Debug.Log("VIGILAR");
