@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;  // Added since we're using a navmesh.
 
-public class EnemigoIA: MonoBehaviour
+public class SoldadoIA: MonoBehaviour
 {
-    Estado FSM;
+    SoldadoEstado FSM;
     public GameObject jugador;
+    public GameObject bala;
+    public int fuerzaBala = 5;
 
     void Start()
     {
         jugador = GameObject.Find("Jugador");
-        FSM = new Vigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
+        FSM = new SoldadoVigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
 
 
@@ -37,8 +39,11 @@ public class EnemigoIA: MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(" --------- LANDANZO ATAQUE ---------");
-            yield return new WaitForSeconds(1f);
+            GameObject balaInstanciada = Instantiate(bala, transform.position, Quaternion.identity);
+            balaInstanciada.GetComponent<Rigidbody>().AddForce(transform.forward * fuerzaBala, ForceMode.Impulse);
+            Debug.Log(" --------- SOLDADO DISPARANDO ---------");
+            yield return new WaitForSeconds(2f);
+
             //int e = 100 + 100;
         }
     }
