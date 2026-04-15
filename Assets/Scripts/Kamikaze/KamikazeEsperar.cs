@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SoldadoVigilar : SoldadoEstado
-{ // Constructor para VIGILAR
-    public SoldadoVigilar() : base()
+public class KamikazeEsperar : KamikazeEstado
+{
+    public KamikazeEsperar() : base()
     {
-        Debug.Log("SOLDADO VIGILAR");
-        nombre = ESTADO.VIGILAR; // Guardamos el nombre del estado en el que nos encontramos.
+        Debug.Log("KAMIKAZE ESPERAR");
+        nombre = ESTADO.ESPERAR; // Guardamos el nombre del estado en el que nos encontramos.
     }
 
     public override void Entrar()
     {
-        // Le pondriamos la animaciÃ³n de andar, calcular los puntos por los que patrulla, etc...
+        // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
 
         base.Entrar();
-        agente.GetComponent<Renderer>().material.color = Color.green;
+        agente.GetComponent<Renderer>().material.color = Color.black;
         agente.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
@@ -26,7 +26,7 @@ public class SoldadoVigilar : SoldadoEstado
 
         if (EstaCercaJugador())
         {
-            siguienteEstado = new SoldadoPerseguir();
+            siguienteEstado = new KamikazeEsperar();
             siguienteEstado.InicializarFSM(agente, jugador);
             faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
         }
@@ -34,11 +34,9 @@ public class SoldadoVigilar : SoldadoEstado
 
     public override void Salir()
     {
-        // Le resetearï¿½amos la animaciï¿½n de andar, o lo que sea...
+        // Le resetear?amos la animaci?n de andar, o lo que sea...
         base.Salir();
     }
 
     // Puede el NPC ver el jugador?
-    
 }
-

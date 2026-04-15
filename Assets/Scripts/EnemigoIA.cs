@@ -14,7 +14,6 @@ public class EnemigoIA: MonoBehaviour
         FSM = new Vigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
 
-
         StartCoroutine(CorrutinaAtaque());
     }
 

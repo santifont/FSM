@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Estado
+public class KamikazeEstado
 {
     protected GameObject agente;
     protected GameObject jugador;
 
-    public void InicializarFSM(GameObject _enemigo, GameObject _jugador)
+    public void InicializarFSM(GameObject _kamikaze, GameObject _jugador)
     {
         // Enlazar bien al GO que gobierna la maquina de estados;
-        agente = _enemigo;
+        agente = _kamikaze;
         jugador = _jugador;
     }
 
-        // 'ESTADOS' que tiene el NPC
+    // 'ESTADOS' que tiene el NPC
     public enum ESTADO
     {
-        VIGILAR, ATACAR, PERSEGUIR
+        ESPERAR, SEGUIR, ATACAR
     };
 
     // 'EVENTOS' - En que parte nos encontramos del estado
@@ -26,12 +26,12 @@ public class Estado
         ENTRAR, ACTUALIZAR, SALIR
     };
 
-    public ESTADO nombre; // Para guardar el nombre del estado
+    public    ESTADO nombre; // Para guardar el nombre del estado
     protected EVENTO faseActual; // Para guardar la fase en la que nos encontramos
-    protected Estado siguienteEstado; // El estado que se EJECUTARÁ A CONTINUACIÓN del estado actual
+    protected KamikazeEstado siguienteEstado; // El estado que se EJECUTARÁ A CONTINUACIÓN del estado actual
 
     // Constructor
-    public Estado()
+    public KamikazeEstado()
     {
 
     }
@@ -42,7 +42,7 @@ public class Estado
     public virtual void Salir()      { faseActual = EVENTO.SALIR; } // La fase de SALIR es la última antes de cambiar de ESTADO, aquí deberiamos limpiar lo que haga falta.
 
     // Este es la función a la que llamaremos para que el NPC inicie la máquina de estados. Vincula los EVENTOS con las funciones que ejecuta cada uno
-    public Estado Procesar()
+    public KamikazeEstado Procesar()
     {
         if (faseActual == EVENTO.ENTRAR) Entrar();
         if (faseActual == EVENTO.ACTUALIZAR) Actualizar();
@@ -53,6 +53,7 @@ public class Estado
         }
         return this; // Si no salimos por el return de arriba, seguimos en el mismo estado.
     }
+
     protected bool EstaCercaJugador()
     {
         Vector3 posJugador = GameObject.Find("Jugador").transform.position;
@@ -71,22 +72,5 @@ public class Estado
         }
         // ...        
         //return false; // DE MOMENTO NO
-    }
-
-    protected bool RangoPersecucion()
-    {
-        Vector3 posJugador = GameObject.Find("Jugador").transform.position;
-        Vector3 posEnemigo = agente.transform.position;
-        float distancia = Vector3.Distance(posJugador, posEnemigo);
-        int distanciaINT = Mathf.FloorToInt(distancia);
-
-        if (distancia < 2)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }

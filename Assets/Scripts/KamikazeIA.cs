@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;  // Added since we're using a navmesh.
+using UnityEngine.AI;
 
-public class SoldadoIA: MonoBehaviour
+public class KamikazeIA : MonoBehaviour
 {
-    SoldadoEstado FSM;
+    KamikazeEstado FSM;
     public GameObject jugador;
     public GameObject bala;
     public int fuerzaBala = 5;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         jugador = GameObject.Find("Jugador");
-        FSM = new SoldadoVigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
+        FSM = new KamikazeEsperar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
-
-
-        StartCoroutine(CorrutinaAtaque());
     }
+       
 
+    // Update is called once per frame
     void Update()
     {
         FSM = FSM.Procesar(); // INICIAMOS LA FSM
@@ -30,19 +30,14 @@ public class SoldadoIA: MonoBehaviour
         StartCoroutine(CorrutinaAtaque());
     }
 
-    public void DetenerAtaque()
-    {
-        StopAllCoroutines();
-    }
-
     private IEnumerator CorrutinaAtaque()
     {
         while (true)
         {
             GameObject balaInstanciada = Instantiate(bala, transform.position, Quaternion.identity);
             balaInstanciada.GetComponent<Rigidbody>().AddForce(transform.forward * fuerzaBala, ForceMode.Impulse);
-            Debug.Log(" --------- SOLDADO DISPARANDO ---------");
-            yield return new WaitForSeconds(2f);
+            Debug.Log(" --------- KAMIKAZE DISPARANDO ---------");
+            yield return new WaitForSeconds(1f);
         }
     }
 }
