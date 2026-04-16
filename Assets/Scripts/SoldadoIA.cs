@@ -8,15 +8,14 @@ public class SoldadoIA: MonoBehaviour
     SoldadoEstado FSM;
     public GameObject jugador;
     public GameObject bala;
-    public int fuerzaBala = 5;
+    public int fuerzaBala = 1000;
+    public bool disparo = false;
 
     void Start()
     {
         jugador = GameObject.Find("Jugador");
         FSM = new SoldadoVigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
-
-
         StartCoroutine(CorrutinaAtaque());
     }
 
@@ -37,7 +36,7 @@ public class SoldadoIA: MonoBehaviour
 
     private IEnumerator CorrutinaAtaque()
     {
-        while (true)
+        while (disparo == true)
         {
             GameObject balaInstanciada = Instantiate(bala, transform.position, Quaternion.identity);
             balaInstanciada.GetComponent<Rigidbody>().AddForce(transform.forward * fuerzaBala, ForceMode.Impulse);

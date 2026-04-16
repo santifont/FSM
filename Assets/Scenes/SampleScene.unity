@@ -205,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48950094, y: -0.165404, z: 0.09515643, w: 0.85086757}
-  m_LocalPosition: {x: 5.02365, y: 18.571829, z: -9.414675}
+  m_LocalRotation: {x: 0.50663584, y: 0, z: 0, w: 0.8621602}
+  m_LocalPosition: {x: 0.07, y: 18.6, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 31.29, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60.88, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 849247895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.75, y: 1, z: 0}
+  m_LocalPosition: {x: -0.19, y: 1, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 1746243665}
   m_Layer: 0
   m_Name: Soldado
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoldadoIA
   jugador: {fileID: 849247895}
-  bala: {fileID: 5073579806605002094, guid: a4be1079e385bdc40889a997aa8c90b7, type: 3}
+  bala: {fileID: 2647221383067974470, guid: a4be1079e385bdc40889a997aa8c90b7, type: 3}
   fuerzaBala: 5
 --- !u!195 &1746243666
 NavMeshAgent:
@@ -726,7 +726,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5000001
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -786,7 +786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d17e32ae6269314e944abcc856b0188, type: 2}
+  - {fileID: 2100000, guid: 4c647b1594452f449931fc99b5af0f93, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 1794582369}
   - component: {fileID: 1794582368}
   - component: {fileID: 1794582370}
+  - component: {fileID: 1794582371}
   m_Layer: 0
   m_Name: NavMesh Surface
   m_TagString: Untagged
@@ -928,6 +929,38 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 04502b84ffefd4145aa381db6b8d5205, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!114 &1794582371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794582367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: -334000983
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 2c3b6ce953ff684498e081a673d2bf73, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1921215280
 GameObject:
@@ -1092,6 +1125,7 @@ GameObject:
   - component: {fileID: 2110905280}
   - component: {fileID: 2110905279}
   - component: {fileID: 2110905283}
+  - component: {fileID: 2110905284}
   m_Layer: 0
   m_Name: Kamikaze
   m_TagString: Untagged
@@ -1147,7 +1181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 122a1c5b0901e4841ba71d13d5f959b8, type: 2}
+  - {fileID: 2100000, guid: 05634c5dc5f887d41a83d1031ff9c503, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1201,9 +1235,9 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110905278}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: -334000983
   m_Radius: 0.5000001
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1215,6 +1249,21 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2110905284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110905278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23a3ddf48d04794ea3dbf7b71160133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KamikazeIA
+  jugador: {fileID: 849247895}
+  bala: {fileID: 2647221383067974470, guid: a4be1079e385bdc40889a997aa8c90b7, type: 3}
+  fuerzaBala: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1225,6 +1274,6 @@ SceneRoots:
   - {fileID: 1641386294}
   - {fileID: 1794582369}
   - {fileID: 1921215284}
-  - {fileID: 1746243670}
   - {fileID: 849247899}
   - {fileID: 2110905282}
+  - {fileID: 1746243670}

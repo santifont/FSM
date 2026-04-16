@@ -12,9 +12,8 @@ public class SoldadoPerseguir : SoldadoEstado
     public override void Entrar()
     {
         // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
-
         base.Entrar();
-        agente.GetComponent<Renderer>().material.color = Color.yellow;
+        agente.GetComponent<Renderer>().material.color = Color.darkRed;
         agente.GetComponent<NavMeshAgent>().isStopped = false;
     }
 

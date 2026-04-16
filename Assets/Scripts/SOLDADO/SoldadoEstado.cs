@@ -68,9 +68,7 @@ public class SoldadoEstado
         else
         {
             return false;
-        }
-        // ...        
-        //return false; // DE MOMENTO NO
+        }     
     }
 
     protected bool RangoPersecucion()

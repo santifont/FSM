@@ -16,7 +16,7 @@ public class KamikazeEsperar : KamikazeEstado
         // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
 
         base.Entrar();
-        agente.GetComponent<Renderer>().material.color = Color.black;
+        agente.GetComponent<Renderer>().material.color = Color.green;
         agente.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
@@ -26,7 +26,7 @@ public class KamikazeEsperar : KamikazeEstado
 
         if (EstaCercaJugador())
         {
-            siguienteEstado = new KamikazeEsperar();
+            siguienteEstado = new KamikazeSeguir();
             siguienteEstado.InicializarFSM(agente, jugador);
             faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
         }

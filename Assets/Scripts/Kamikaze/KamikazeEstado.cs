@@ -6,6 +6,7 @@ public class KamikazeEstado
 {
     protected GameObject agente;
     protected GameObject jugador;
+    protected GameObject enemigo;
 
     public void InicializarFSM(GameObject _kamikaze, GameObject _jugador)
     {
@@ -69,8 +70,23 @@ public class KamikazeEstado
         else
         {
             return false;
+        }      
+    }
+
+    protected bool RangoPersecucion()
+    {
+        Vector3 posJugador = GameObject.Find("Jugador").transform.position;
+        Vector3 posEnemigo = agente.transform.position;
+        float distancia = Vector3.Distance(posJugador, posEnemigo);
+        int distanciaINT = Mathf.FloorToInt(distancia);
+
+        if (distancia < 2)
+        {
+            return true;
         }
-        // ...        
-        //return false; // DE MOMENTO NO
+        else
+        {
+            return false;
+        }
     }
 }

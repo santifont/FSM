@@ -16,7 +16,7 @@ public class SoldadoVigilar : SoldadoEstado
         // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
 
         base.Entrar();
-        agente.GetComponent<Renderer>().material.color = Color.green;
+        agente.GetComponent<Renderer>().material.color = Color.red;
         agente.GetComponent<NavMeshAgent>().isStopped = true;
     }
 
