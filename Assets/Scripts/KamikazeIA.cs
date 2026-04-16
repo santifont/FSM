@@ -9,6 +9,7 @@ public class KamikazeIA : MonoBehaviour
     public GameObject jugador;
     public GameObject bala;
     public int fuerzaBala = 5;
+    public bool disparo = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +29,11 @@ public class KamikazeIA : MonoBehaviour
     public void EmpezarAtaque()
     {
         StartCoroutine(CorrutinaAtaque());
+    }
+
+    public void DetenerAtaque()
+    {
+        StopAllCoroutines();
     }
 
     private IEnumerator CorrutinaAtaque()
