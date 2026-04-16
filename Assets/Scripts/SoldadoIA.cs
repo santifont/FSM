@@ -16,7 +16,7 @@ public class SoldadoIA: MonoBehaviour
         jugador = GameObject.Find("Jugador");
         FSM = new SoldadoVigilar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
-        StartCoroutine(CorrutinaAtaque());
+        //StartCoroutine(CorrutinaAtaque());
     }
 
     void Update()

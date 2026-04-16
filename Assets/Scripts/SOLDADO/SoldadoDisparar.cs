@@ -8,7 +8,7 @@ public class SoldadoDisparar : SoldadoEstado
 {
     public SoldadoDisparar() : base()
     {
-        Debug.Log("DISPARAR");
+        //Debug.Log("DISPARAR");
         nombre = ESTADO.ATACAR; // Guardamos el nombre del estado en el que nos encontramos.
     }
 
@@ -19,6 +19,7 @@ public class SoldadoDisparar : SoldadoEstado
 
         agente.GetComponent<Renderer>().material.color = Color.red;
         agente.GetComponent<NavMeshAgent>().isStopped = true;
+        agente.GetComponent<SoldadoIA>().disparo = true;
         agente.GetComponent<SoldadoIA>().EmpezarAtaque();
     }
 
@@ -37,7 +38,8 @@ public class SoldadoDisparar : SoldadoEstado
     {
         // Le resetearíamos la animación de disparar, o lo que sea...
         base.Salir();
-        agente.GetComponent<SoldadoIA>().DetenerAtaque();
+        agente.GetComponent<SoldadoIA>().disparo = false;
+        //agente.GetComponent<SoldadoIA>().DetenerAtaque();
     }
 
     public bool PuedeAtacar()
