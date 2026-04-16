@@ -22,7 +22,7 @@ public class KamikazeDisparar : KamikazeEstado
 
     public override void Actualizar()
     {
-        agente.GetComponent<Transform>().LookAt(enemigoCercano.transform.position);
+        //agente.GetComponent<Transform>().LookAt(enemigoCercano.transform.position);
         /*if (!RangoPersecucion())
         {
             siguienteEstado = new KamikazeSeguir();

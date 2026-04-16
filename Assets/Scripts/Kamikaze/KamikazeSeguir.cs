@@ -28,7 +28,6 @@ public class KamikazeSeguir : KamikazeEstado
         // TODO EL RATO SIGUIENDO AL JUGAR
         posJugador = jugador.transform.position;
         agente.GetComponent<NavMeshAgent>().SetDestination(jugador.transform.position);
-        //agente.GetComponent<Transform>().LookAt(jugador.transform.position);
 
         /*
         if (!EstaCercaJugador())
@@ -57,6 +56,8 @@ public class KamikazeSeguir : KamikazeEstado
         if(enemigoCercano != null)
         {
             distanciaEnemigo = Vector3.Distance(posJugador, enemigoCercano.transform.position);
+            agente.GetComponent<Transform>().LookAt(enemigoCercano.transform.position);
+
         }
 
         for (int i = 0; i < listaEnemigos.Length; i++) // recorrer lista 

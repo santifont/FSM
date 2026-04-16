@@ -8,7 +8,7 @@ public class KamikazeIA : MonoBehaviour
     KamikazeEstado FSM;
     public GameObject jugador;
     public GameObject bala;
-    public int fuerzaBala = 5;
+    public int fuerzaBala = 1000;
     public bool disparo = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
