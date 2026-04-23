@@ -6,7 +6,6 @@ public class KamikazeEstado
 {
     protected GameObject agente;
     protected GameObject jugador;
-    protected GameObject enemigoCercano;
     protected float distanciaEnemigo;
 
     public void InicializarFSM(GameObject _kamikaze, GameObject _jugador)

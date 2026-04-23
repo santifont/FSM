@@ -7,17 +7,17 @@ public class KamikazeSeguir : KamikazeEstado
 
     public KamikazeSeguir() : base()
     {
-        Debug.Log("KAMIKAZE SEGUIR");
         nombre = ESTADO.SEGUIR; // Guardamos el nombre del estado en el que nos encontramos.
     }
 
     public override void Entrar()
     {
+        Debug.Log(agente.GetComponent<KamikazeIA>().enemigoCercano);
         // Le pondriamos la animación de andar, calcular los puntos por los que patrulla, etc...
         base.Entrar();
         agente.GetComponent<Renderer>().material.color = Color.darkGreen;
         agente.GetComponent<NavMeshAgent>().isStopped = false;
-        enemigoCercano = null;
+        agente.GetComponent<KamikazeIA>().enemigoCercano = null;
         distanciaEnemigo = -1;
         agente.GetComponent<Transform>().localScale = agente.GetComponent<Transform>().localScale * 2;
     }
@@ -42,7 +42,8 @@ public class KamikazeSeguir : KamikazeEstado
             siguienteEstado.InicializarFSM(agente, jugador);
             faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
         }
-        */// FUNCION --> COMPROBAR ENEMIGO CERCANO:
+        */
+        /// FUNCION --> COMPROBAR ENEMIGO CERCANO:
           // 1. ACCEDER A GameObject.Finds...
           // 2. RECORRER LA LISTA Y ELEGIR AL ENEMIGO MAS CERCANO
           // 2.1 Comparando la distancia de cada enemigo
@@ -53,11 +54,10 @@ public class KamikazeSeguir : KamikazeEstado
         Debug.Log("Kamikaze - Actualizar " + listaEnemigos.Length);
         
 
-        if(enemigoCercano != null)
+        if(agente.GetComponent<KamikazeIA>().enemigoCercano != null)
         {
-            distanciaEnemigo = Vector3.Distance(posJugador, enemigoCercano.transform.position);
-            agente.GetComponent<Transform>().LookAt(enemigoCercano.transform.position);
-
+            distanciaEnemigo = Vector3.Distance(posJugador, agente.GetComponent<KamikazeIA>().enemigoCercano.transform.position);
+            agente.GetComponent<Transform>().LookAt(agente.GetComponent<KamikazeIA>().enemigoCercano.transform.position);
         }
 
         for (int i = 0; i < listaEnemigos.Length; i++) // recorrer lista 
@@ -66,29 +66,33 @@ public class KamikazeSeguir : KamikazeEstado
             float distancia = Vector3.Distance(posJugador, posEnemigo);
             if (distancia < umbral)
             {
-                if (enemigoCercano == null)
+                if (agente.GetComponent<KamikazeIA>().enemigoCercano == null)
                 {
-                    enemigoCercano = listaEnemigos[i];
+                    agente.GetComponent<KamikazeIA>().enemigoCercano = listaEnemigos[i];
                     distanciaEnemigo = distancia;
-                    Debug.Log("ENEMIGO NULL ESTABLECIDO=" + enemigoCercano.gameObject.name);
+                    Debug.Log("ENEMIGO NULL ESTABLECIDO=" + agente.GetComponent<KamikazeIA>().enemigoCercano.gameObject.name);
                 }
                 else if (distancia < distanciaEnemigo)
                 {
-                    enemigoCercano = listaEnemigos[i];
+                    agente.GetComponent<KamikazeIA>().enemigoCercano = listaEnemigos[i];
                     distanciaEnemigo = distancia;
-                    Debug.Log("ENEMIGO NULL REMPLAZADO=" + enemigoCercano.gameObject.name);
+                    Debug.Log("ENEMIGO NULL REMPLAZADO=" + agente.GetComponent<KamikazeIA>().enemigoCercano.gameObject.name);
                 }
                     // 1 -- NO HAY ENEMIGO REGISTRADO en enemigoCercano == null
                     // enemigoCercano --> rellenarlo con en enemigo sin comparar
 
                     // 2 -- TENEMOS YA UN ENEMIGO REGISTRADO
                     // comparar si este enemigo está más cerca
-                    // que el enemigoCercano                   
+                    // que el enemigoCercano
             }
         }
+        
+
+        if (agente.GetComponent<KamikazeIA>().enemigoCercano != null)
+        {
+            siguienteEstado = new KamikazeDisparar();
+            siguienteEstado.InicializarFSM(agente, jugador);
+            faseActual = EVENTO.SALIR;
+        }
     }
-
-
-
-
 }

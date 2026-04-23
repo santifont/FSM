@@ -1,3 +1,5 @@
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,21 +16,26 @@ public class KamikazeDisparar : KamikazeEstado
         // Le pondríamos la animación de disparar, o lo que sea...
         base.Entrar();
 
-        agente.GetComponent<Renderer>().material.color = Color.green;
-        agente.GetComponent<NavMeshAgent>().isStopped = true;
+        agente.GetComponent<Renderer>().material.color = Color.black;
+        agente.GetComponent<NavMeshAgent>().isStopped = false;
         agente.GetComponent<KamikazeIA>().disparo = true;
-        agente.GetComponent<KamikazeIA>().EmpezarAtaque();
+        agente.GetComponent<NavMeshAgent>().stoppingDistance = 0;
+        agente.GetComponent<Transform>().localScale = agente.GetComponent<Transform>().localScale / 2;
+        
     }
 
     public override void Actualizar()
     {
-        //agente.GetComponent<Transform>().LookAt(enemigoCercano.transform.position);
-        /*if (!RangoPersecucion())
+        /*
+        if (!RangoPersecucion())
         {
             siguienteEstado = new KamikazeSeguir();
             siguienteEstado.InicializarFSM(agente, jugador);
             faseActual = EVENTO.SALIR; // Cambiamos de FASE ya que pasamos de VIGILAR a ATACAR.
-        }*/
+        }
+        */
+
+       agente.GetComponent<NavMeshAgent>().SetDestination(agente.GetComponent<KamikazeIA>().enemigoCercano.transform.position);
     }
 
     public override void Salir()

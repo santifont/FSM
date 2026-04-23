@@ -10,6 +10,7 @@ public class KamikazeIA : MonoBehaviour
     public GameObject bala;
     public int fuerzaBala = 1000;
     public bool disparo = false;
+    public GameObject enemigoCercano;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,6 +18,7 @@ public class KamikazeIA : MonoBehaviour
         jugador = GameObject.Find("Jugador");
         FSM = new KamikazeEsperar(); // CREAMOS EL ESTADO INICIAL DEL NPC
         FSM.InicializarFSM(gameObject, jugador);
+
     }
        
 
@@ -35,7 +37,7 @@ public class KamikazeIA : MonoBehaviour
     {
         StopAllCoroutines();
     }
-
+    
     private IEnumerator CorrutinaAtaque()
     {
         while (true)
@@ -44,6 +46,16 @@ public class KamikazeIA : MonoBehaviour
             balaInstanciada.GetComponent<Rigidbody>().AddForce(transform.forward * fuerzaBala, ForceMode.Impulse);
             Debug.Log(" --------- KAMIKAZE DISPARANDO ---------");
             yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("TRIGGER: " + other.gameObject.name);
+       if (other.gameObject.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
