@@ -51,8 +51,7 @@ public class KamikazeIA : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TRIGGER: " + other.gameObject.name);
-       if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
