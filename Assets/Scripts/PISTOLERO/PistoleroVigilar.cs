@@ -5,7 +5,7 @@ public class PistoleroVigilar : PistoleroEstado
 {
     public PistoleroVigilar() : base()
     {
-        Debug.Log("PISTOLERO VIGILAR");
+        Debug.Log("PISTOLERO VIGILANDO");
         nombre = ESTADO.VIGILAR; // Guardamos el nombre del estado en el que nos encontramos.
     }
 

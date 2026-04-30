@@ -58,7 +58,7 @@ public class PistoleroEstado
         Vector3 posEnemigo = agente.transform.position;
         float distancia = Vector3.Distance(posJugador, posEnemigo);
 
-        if (distancia < 17)
+        if (distancia <= 20)
         {
             return true;
         }
